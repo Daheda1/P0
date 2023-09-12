@@ -52,3 +52,6 @@ def get_terrain(tile):
 
 if __name__ == "__main__":
     main()
+
+    #hej
+    

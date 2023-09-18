@@ -29,20 +29,6 @@ def get_tiles(image):
             tiles[-1].append(image[y*100:(y+1)*100, x*100:(x+1)*100])
     return tiles
 
-def save_tile(tile, output_folder, image_name, x, y):
-    # Create a folder for 'blandet' if it doesn't exist
-    if not os.path.exists(os.path.join(output_folder, "blandet")):
-        os.makedirs(os.path.join(output_folder, "blandet"))
-
-    # Generate a unique filename for the tile based on the image name and tile coordinates
-    tile_filename = f"{image_name}_{x}_{y}.png"
-
-    # Save the tile to the 'blandet' folder
-    tile_path = os.path.join(output_folder, "blandet", tile_filename)
-    cv.imwrite(tile_path, tile)
-
-    print(f"Saved Tile as {tile_filename} in 'blandet' folder")
-
 # Determine the type of terrain in a tile
 def get_terrain(tile):
     hsv_tile = cv.cvtColor(tile, cv.COLOR_BGR2HSV)

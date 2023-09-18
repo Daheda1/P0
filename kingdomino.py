@@ -7,7 +7,7 @@ def main():
     print("+-------------------------------+")
     print("| King Domino points calculator |")
     print("+-------------------------------+")
-    image_path = r"C:\Users\admin\Downloads\King Domino dataset\1.jpg"
+    image_path = r"/Users/jens-jakobskotingerslev/Documents/GitHub/P0/King Domino dataset (1)/1.jpg"
     if not os.path.isfile(image_path):
         print("Image not found")
         return
@@ -62,5 +62,6 @@ def get_terrain(tile):
 
 if __name__ == "__main__":
     main()
+
 
 

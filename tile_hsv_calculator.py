@@ -4,8 +4,8 @@ import os
 import csv
 
 def main():
-    tiles_folder = "/Users/dannihedegaarddahl/Documents/GitHub/P0/King Domino dataset (1)"
-    csv_document = "/Users/dannihedegaarddahl/Documents/GitHub/P0/test.csv"
+    tiles_folder = "/Users/dannihedegaarddahl/Documents/GitHub/P0/Categories/Field"
+    csv_document = "/Users/dannihedegaarddahl/Documents/GitHub/P0/forest.csv"
 
     images = load_images_from_folder(tiles_folder)
 

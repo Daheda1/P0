@@ -32,9 +32,9 @@ def get_tiles(image):
 # Determine the type of terrain in a tile
 def get_terrain(tile):
     hsv_tile = cv.cvtColor(tile, cv.COLOR_BGR2HSV)
-    hue, saturation, value = np.mean(hsv_tile, axis=(0,1))
-    
-    if 25.5795 <= hue <= 52.6424 and 162.9737 <= saturation <= 243.9017 and 65.3475 <= value <= 171.2089:
+    hue, saturation, value = np.mean(hsv_tile, axis=(0, 1))
+
+    if 27.3777 <= hue <= 52.6424 and 142.4363 <= saturation <= 243.9017 and 82.7691 <= value <= 171.2089:
         return "Grassland"
 
     if 26.9323 <= hue <= 66.0016 and 79.1927 <= saturation <= 210.5411 and 28.2416 <= value <= 95.3995:

@@ -1,26 +1,25 @@
 from kingdomino import get_terrain
 import os
-from collections import defaultdict
 import cv2 as cv
 import pandas as pd
 
 def test_get_terrain(folder_path):
-    confusion_matrix = defaultdict(lambda: defaultdict(int))
-    unique_terrains = []
-    
+    unique_terrains = set()
     total_correct = 0
     total_count = 0
 
-    # Dictionary til at holde styr på antallet af korrekte og totale prøver for hver klasse
-    correct_counts = defaultdict(int)
-    total_counts = defaultdict(int)
+    # Initialize DataFrame to store confusion matrix
+    confusion_matrix = pd.DataFrame()
+
+    # Dictionary to keep track of the correct and total counts for each class
+    correct_counts = {}
+    total_counts = {}
     
     for terrain_type in os.listdir(folder_path):
         terrain_folder = os.path.join(folder_path, terrain_type)
         
         if os.path.isdir(terrain_folder):
-            if terrain_type not in unique_terrains:
-                unique_terrains.append(terrain_type)
+            unique_terrains.add(terrain_type)
             
             for tile_file in os.listdir(terrain_folder):
                 tile_path = os.path.join(terrain_folder, tile_file)
@@ -31,30 +30,31 @@ def test_get_terrain(folder_path):
                     continue
                 
                 predicted_terrain = get_terrain(tile)
-                
-                if predicted_terrain not in unique_terrains:
-                    unique_terrains.append(predicted_terrain)
-                
-                confusion_matrix[terrain_type][predicted_terrain] += 1
-                
+                unique_terrains.add(predicted_terrain)
+
+                # Update confusion matrix
+                confusion_matrix.at[terrain_type, predicted_terrain] = confusion_matrix.at[terrain_type, predicted_terrain] + 1 if terrain_type in confusion_matrix.index and predicted_terrain in confusion_matrix.columns else 1
+
                 total_count += 1
-                total_counts[terrain_type] += 1
+                total_counts[terrain_type] = total_counts.get(terrain_type, 0) + 1
                 
                 if predicted_terrain == terrain_type:
                     total_correct += 1
-                    correct_counts[terrain_type] += 1
+                    correct_counts[terrain_type] = correct_counts.get(terrain_type, 0) + 1
     
-    # Beregn nøjagtighed for hver klasse og total nøjagtighed
+    # Calculate accuracy for each class and overall accuracy
     overall_accuracy = (total_correct / total_count) * 100 if total_count > 0 else 0
     print(f"Overall accuracy: {overall_accuracy}%")
     
     for terrain_type in unique_terrains:
-        accuracy = (correct_counts[terrain_type] / total_counts[terrain_type]) * 100 if total_counts[terrain_type] > 0 else 0
+        accuracy = (correct_counts.get(terrain_type, 0) / total_counts.get(terrain_type, 1)) * 100
         print(f"Accuracy for {terrain_type}: {accuracy}%")
-    
-    df = pd.DataFrame(confusion_matrix, index=unique_terrains, columns=unique_terrains).fillna(0).astype(int)
-    return df
 
-# Eksempel på, hvordan du kan kalde testfunktionen og få confusion matrix
+    # Fill missing values in confusion matrix with 0 and convert to integers
+    confusion_matrix = confusion_matrix.fillna(0).astype(int)
+    
+    return confusion_matrix
+
+# Example on how to call the test function and get the confusion matrix
 conf_matrix = test_get_terrain("/Users/dannihedegaarddahl/Documents/GitHub/P0/categories testset")
 print(conf_matrix)

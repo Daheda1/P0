@@ -14,37 +14,37 @@ def main():
     if not os.path.isfile(image_path):
         print("Image not found")
         return
-    # Definerer "image" som en variable, der bruger cv funktionen cv.imread, til at aflæse billeder"
+    # Definerer image som en variable, der bruger cv funktionen cv.imread, til at aflæse billeder
     image = cv.imread(image_path)
-    # Definerer "tiles" som henter "get_tiles" funktionen til "image" variablet
+    # Definerer tiles ved at køre get_tiles funktionen med image variablet som input
     tiles = get_tiles(image)
-    # Printer antal af "tiles" for "for loopet"
+    # Printer antal af tiles
     print(len(tiles))
-    # "for loopet" ser og gentager hvert element på y-aksen i listen "tiles"
+    # for loopet ser og gentager hvert element på y-aksen i listen tiles
     for y, row in enumerate(tiles):
-    # "nested loopet" ser og gentager hvert element på x-aksen i listen "tiles"
+    # nested loopet ser og gentager hvert element på x-aksen i listen tiles
         for x, tile in enumerate(row):
-    # "print" funktionen, printer så hvor hvert billede er, samt hvilket slags billede det er. 
+    # print funktionen, printer så hvor hvert billede er,
+    # samt definerer hvilken type tile det er vha. get_terrain funktionen
             print(f"Tile ({x}, {y}):")
             print(get_terrain(tile))
             print("=====")
 
 # deler billedet op i 25 dele
-# Definerer "get_tiles" som image variablet
 def get_tiles(image):
     # laver en tom liste 
     tiles = []
-    # skaber et "for loop" hvor elementer vil blive tilføjet til listen, hvor y repræsenterer en række af billedet 
+    # kører et for loop hvor elementer vil blive tilføjet til listen, hvor y repræsenterer en række af billedet
     for y in range(5):
         tiles.append([])
-    # Skaber et "nested loop, hvor billedet bliver delt op i en tavel med 25 kvadrater af 100,100 px og tilføjer til listen "tiles"
+    # kører et nested loop, hvor billedet bliver delt op i en tavel med 25 kvadrater af 100,100 px og tilføjer til listen tiles
         for x in range(5):
             tiles[-1].append(image[y*100:(y+1)*100, x*100:(x+1)*100])
     return tiles
 
-# Bestemmer "tile" type
-# Definerer en funktion, der først konverterer "rgb" værdierne for farverine til "hsv"værdier
-# derefter bruger funktionen "NumPy" funktionen "mean" til at finde "hsv" gennemsnitsværiden for billede tabellen
+# Bestemmer tile type
+# Definerer en funktion, der først konverterer rgb-værdierne for farverne til hsv-værdier
+# derefter bruger funktionen mean funktionen i Numpy bilblioteket til at finde hsv gennemsnitsværdien for billede tabellen
 def get_terrain(tile):
     hsv_tile = cv.cvtColor(tile, cv.COLOR_BGR2HSV)
     hue, saturation, value = np.mean(hsv_tile, axis=(0, 1))

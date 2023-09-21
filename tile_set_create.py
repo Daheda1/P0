@@ -3,13 +3,10 @@ import numpy as np
 import os
 from kingdomino import get_tiles
 
-
-
-
 # Main function containing the backbone of the program
 def main():
     output_folder = "/Users/dannihedegaarddahl/Documents/GitHub/P0"
-    input_folder = "/Users/dannihedegaarddahl/Documents/GitHub/P0/King Domino dataset"
+    input_folder = "/Users/dannihedegaarddahl/Documents/GitHub/P0/King Domino testset"
 
 
     for filename in os.listdir(input_folder):

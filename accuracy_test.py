@@ -4,9 +4,6 @@ from collections import defaultdict
 import cv2 as cv
 import pandas as pd
 
-from collections import defaultdict
-import pandas as pd
-
 def test_get_terrain(folder_path):
     confusion_matrix = defaultdict(lambda: defaultdict(int))
     unique_terrains = []

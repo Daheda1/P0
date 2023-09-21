@@ -56,5 +56,5 @@ def test_get_terrain(folder_path):
     return df
 
 # Eksempel på, hvordan du kan kalde testfunktionen og få confusion matrix
-conf_matrix = test_get_terrain("/Users/dannihedegaarddahl/Documents/GitHub/P0/Categories")
+conf_matrix = test_get_terrain("/Users/dannihedegaarddahl/Documents/GitHub/P0/categories testset")
 print(conf_matrix)

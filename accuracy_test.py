@@ -12,7 +12,7 @@ def test_get_terrain(folder_path):
     # Bruger pandas 'DataFrame' funktion til at opbevare vores 'confusions_matrix' i en tabel med rækker og kolonner. 
     confusion_matrix = pd.DataFrame()
 
-    # Definerer 2 lister: 
+    # Definerer 2 dictionarys: 
     # 1 til tælling af korrekte tællinger og 1 til totale tællinger
     correct_counts = {}
     total_counts = {}
@@ -54,8 +54,7 @@ def test_get_terrain(folder_path):
                     # Øger det samlede antal korrekte klassificeringer med 1, hvis if-statement opfyldes.
                     total_correct += 1
                     
-                    # Opdaterer antallet af korrekte klassificeringer for den specifikke terræntype.
-                    # Hvis terræntypen ikke allerede findes i 'correct_counts', initialiseres den med 0 og derefter øges med 1.
+                    # Opdaterer antallet af korrekte klassificeringer for den specifikke terræntype i dictionary.
                     correct_counts[terrain_type] = correct_counts.get(terrain_type, 0) + 1
     
     # Beregner en overall accuracy i procent og printer svaret som en text. 

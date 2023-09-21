@@ -29,7 +29,7 @@ def test_get_terrain(folder_path):
                 
                 # Vi bruger cv.imread til at indlæse tile_path og definerer det som tile.
                 tile = cv.imread(tile_path)
-                # Hvis tile er i kategorien "None", så printer programmet en message. Herefter går den videre til næste tile.
+                # Hvis tile ikke er fil/billedfil, så printer programmet en message. Herefter går den videre til næste tile.
                 if tile is None:
                     print(f"Could not read the image from {tile_path}. Skipping...")
                     continue

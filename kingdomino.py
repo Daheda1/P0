@@ -9,7 +9,7 @@ def main():
     print("+-------------------------------+")
 
     # Opretter en variabel, med stien til billede
-    image_path = r"/Users/jens-jakobskotingerslev/Documents/GitHub/P0/King Domino testset/60.jpg"
+    image_path = r"/Users/dannihedegaarddahl/Documents/GitHub/P0/King Domino testset/74.jpg"
     # Hvis billede ikke kan findes, vil funktionen printe "Image not found"
     if not os.path.isfile(image_path):
         print("Image not found")
@@ -49,9 +49,12 @@ def get_terrain(tile):
     hsv_tile = cv.cvtColor(tile, cv.COLOR_BGR2HSV)
     hue, saturation, value = np.mean(hsv_tile, axis=(0, 1))
 
+    if 21.5861 <= hue <= 57.3009 and 56.1645 <= saturation <= 145.6585 and 36.7319 <= value <= 101.2622:
+        return "Mine"
+
     if 27.3777 <= hue <= 52.6424 and 142.4363 <= saturation <= 243.9017 and 82.7691 <= value <= 171.2089:
         return "Grassland"
-
+    
     if 26.9323 <= hue <= 66.0016 and 79.1927 <= saturation <= 210.5411 and 28.2416 <= value <= 95.3995:
         return "Forest"
 
@@ -66,9 +69,6 @@ def get_terrain(tile):
 
     if 12.8941 <= hue <= 65.3644 and 44.1873 <= saturation <= 155.6897 and 39.7103 <= value <= 158.3814:
         return "Home"
-
-    if 21.5861 <= hue <= 57.3009 and 56.1645 <= saturation <= 145.6585 and 36.7319 <= value <= 101.2622:
-        return "Mine"
 
     if 15.6347 <= hue <= 26.5975 and 154.7204 <= saturation <= 222.5555 and 101.0583 <= value <= 167.7649:
         return "None"

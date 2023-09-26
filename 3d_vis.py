@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sns
 
 # Indlæs den kombinerede CSV-fil
-csv_path = "CSV/combined.csv"  # Ændr denne sti til din egen fil
+csv_path = "CSV/combined.csv" 
 combined_df = pd.read_csv(csv_path)
 
 # Sæt farvepaletten op
